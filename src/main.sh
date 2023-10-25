@@ -3,23 +3,8 @@
 # Get the directory where this script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Check if Python 3 is installed todo I want it to check only on first initialization, afer it is initialized I want it to be skipped.
-if ! command -v python3 &> /dev/null; then
-    echo "Python 3 is not installed. Installing..."
-    sudo apt update
-    sudo apt install python3
-else
-    echo "Python 3 is already installed."
-fi
 
 
-# Check if virtualenv is installed
-if ! command -v virtualenv &> /dev/null; then
-    echo "virtualenv is not installed. Installing..."
-    sudo apt install virtualenv
-else
-    echo "virtualenv is already installed."
-fi
 
 file_name="$SCRIPT_DIR/initialized.txt"
 
@@ -36,6 +21,26 @@ if [ -e "$file_name" ]; then
 
 else
     echo "Installing required deps..."
+
+
+# Check if Python 3 is installed todo I want it to check only on first initialization, afer it is initialized I want it to be skipped.
+    if ! command -v python3 &> /dev/null; then
+        echo "Python 3 is not installed. Installing..."
+        sudo apt update
+        sudo apt install python3
+    else
+        echo "Python 3 is already installed."
+    fi
+
+    # Check if virtualenv is installed
+    if ! command -v virtualenv &> /dev/null; then
+        echo "virtualenv is not installed. Installing..."
+        sudo apt install virtualenv
+    else
+        echo "virtualenv is already installed."
+    fi
+
+
 
     pip install g4f
     pip install urwid
